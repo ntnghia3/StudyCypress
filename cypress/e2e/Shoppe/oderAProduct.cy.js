@@ -1,5 +1,4 @@
 /// <reference types="cypress-xpath" />
-/// <reference types="@shelex/cypress-allure-plugin" />
 import '@shelex/cypress-allure-plugin';
 const xpath = require('cypress-xpath')
 const LoginPage = require("../../support/pages/Winmart/loginPage");

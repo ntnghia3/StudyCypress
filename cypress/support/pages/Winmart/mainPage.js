@@ -5,7 +5,7 @@ class MainPage {
     }
 
     getClosePopupButton(){
-        return  cy.xpath('//button[@id=\'viteex-btn-6388890a58679c5ea8087698-close\']')
+        return  cy.xpath('//button[@class="viteex-btn-close" and @title="Đóng"]').first()
     }
     getAddProduct(){
         return cy.xpath('//button[contains(@class,"add-item-to-cart__Button-sc-1ruto21-1 eSzuRc")]')
