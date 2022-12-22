@@ -6,22 +6,22 @@ Feature: practice-form
 #    Given I open the website: 'https://demoqa.com/automation-practice-form'
     Given I open the demoqa praticeForm
     When I wanna fill to the field text
-      | field      | value              |
-      | firstName  | Nghia              |
-      | lastName   | Ngo                |
-      | userEmail  | ngonghia@gmail.com |
-      | userNumber | 0123456789         |
-      | currentAddress | abc abc         |
+      | field          | value              |
+      | firstName      | Nghia              |
+      | lastName       | Ngo                |
+      | userEmail      | ngonghia@gmail.com |
+      | userNumber     | 0123456789         |
+      | currentAddress | abc abc            |
     And I wanna select to the option
-      | field     | value |
-      | gender | Male |
+      | field  | value |
+      | gender | Male  |
     And I wanna select "English" on subjects
     When I wanna select the hobbies checkbox
-     | value              |
-    | Sports              |
-      | Reading                |
-
-
+      | value   |
+      | Sports  |
+      | Reading |
     And I wanna select "23 Jun 1995" on DOB
-
     And I wanna select "NCR" on state
+    And I wanna select "Delhi" on city
+    And I wanna submit the form
+    Then I wanna verify student information

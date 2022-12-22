@@ -22,6 +22,18 @@ const months = new Map([
     ["Nov", 11],
     ["Dec", 12]
 ]);
+let studentInformation = new Map([
+    ["Student Name", "Nghia Ngo"],
+    ["Student Email", "ngonghia@gmail.com"],
+    ["Gender", "Male"],
+    ["Mobile", "0123456789"],
+    ["Date of Birth", "23 July,1995"],
+    ["Subjects", "English"],
+    ["Hobbies", "Sports, Reading"],
+    ["Picture", ""],
+    ["Address", "abc abc"],
+    ["State and City", "NCR Delhi"]
+]);
 const practiceFormPage= new PracticeFormPage()
 let dob;
 
@@ -31,7 +43,8 @@ Given('I open the website: {string}', (url)=> {
 
 Given('I open the demoqa praticeForm', ()=> {
     cy.visit("https://demoqa.com/automation-practice-form")
-    cy.wait(2000)
+    cy.wait(Cypress.env("defaultWait"))
+    cy.viewport(1920, 1080)
 })
 When('I wanna fill to the field text', (dataTable)=> {
     cy.log('raw : ' + dataTable.raw());
@@ -52,9 +65,9 @@ When('I wanna select to the option', (dataTable)=> {
 })
 When('I wanna select {string} on subjects', (subject)=> {
     practiceFormPage.getSubjectField().type(subject)
-    cy.wait(2000)
+    cy.wait(Cypress.env("defaultWait"))
     practiceFormPage.getSubjectFieldOption().click()
-    cy.wait(2000)
+    cy.wait(Cypress.env("defaultWait"))
 })
 
 When('I wanna select the hobbies checkbox', (dataTable)=> {
@@ -72,15 +85,43 @@ When('I wanna select {string} on DOB', (date)=> {
     let month = dateArr[1]
     let year = dateArr[2]
     practiceFormPage.getSelectDOB().click()
-    cy.wait(2000)
+    cy.wait(Cypress.env("defaultWait"))
     practiceFormPage.getSelectYear().select(year)
-    cy.wait(2000)
+    cy.wait(Cypress.env("defaultWait"))
     practiceFormPage.getSelectMonth().select(months.get(month))
-    cy.wait(2000)
+    cy.wait(Cypress.env("defaultWait"))
     practiceFormPage.getSelectDate(day).click()
-    cy.wait(2000)
+    cy.wait(Cypress.env("defaultWait"))
 })
 
 When('I wanna select {string} on state', (state)=> {
-    practiceFormPage.getSelectState().select(state)
+    practiceFormPage.getSelectState().type(state,{force: true})
+    cy.wait(Cypress.env("defaultWait"))
+    practiceFormPage.getSelectStateOption().click()
+    cy.wait(Cypress.env("defaultWait"))
+})
+
+When('I wanna select {string} on city', (city)=> {
+    practiceFormPage.getSelectCity().type(city,{force: true})
+    cy.wait(Cypress.env("defaultWait"))
+    practiceFormPage.getSelectCityOption().click()
+})
+When('I wanna submit the form', ()=> {
+    practiceFormPage.getSubmitButton().click()
+    cy.wait(Cypress.env("defaultWait"))
+})
+
+Then('I wanna verify student information', ()=> {
+    let count = 0
+    for (let key of studentInformation.keys()) {
+        count++
+        practiceFormPage.getCellContentTable(count,1).should('be.visible');
+        practiceFormPage.getCellContentTable(count,1).then($elem => {
+            expect($elem.text()).to.be.contain(key)
+        });
+        practiceFormPage.getCellContentTable(count,2).should('be.visible');
+        practiceFormPage.getCellContentTable(count,2).then($elem => {
+            expect($elem.text()).to.be.contain(studentInformation.get(key))
+        });
+    }
 })

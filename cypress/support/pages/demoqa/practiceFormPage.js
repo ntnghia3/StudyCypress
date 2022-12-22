@@ -36,7 +36,24 @@ class PracticeFormPage {
     }
 
     getSelectState() {
-        return cy.get('#state');
+        return cy.xpath('//input[@id=\'react-select-3-input\']');
+    }
+    getSelectStateOption() {
+        return cy.xpath('//div[contains(@id,\'react-select\')]');
+    }
+
+    getSelectCity() {
+        return cy.xpath('//input[@id=\'react-select-4-input\']');
+    }
+    getSelectCityOption() {
+        return cy.xpath('//div[contains(@id,\'react-select\')]');
+    }
+    getSubmitButton() {
+        return cy.xpath('//button[@id="submit"]');
+    }
+
+    getCellContentTable(row,col) {
+        return cy.get('tbody tr:nth-child('+ row +') td:nth-child('+ col + ')');
     }
 }
 export default PracticeFormPage;
