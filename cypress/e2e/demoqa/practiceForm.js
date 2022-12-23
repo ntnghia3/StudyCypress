@@ -39,6 +39,7 @@ let dob;
 
 Given('I open the website: {string}', (url)=> {
     cy.visit(url)
+    cy.viewport(1920, 1080)
 })
 
 Given('I open the demoqa praticeForm', ()=> {
