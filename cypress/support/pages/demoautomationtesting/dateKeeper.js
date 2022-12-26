@@ -10,6 +10,9 @@ class DateKeeper {
     getYear() {
         return cy.xpath('//span[@class=\'ui-datepicker-year\']');
     }
+    getDate(date) {
+        return cy.xpath('//a[normalize-space()='+  date + ']');
+    }
     getNextButton() {
         return cy.xpath('//span[@class=\'ui-icon ui-icon-circle-triangle-e\']');
     }

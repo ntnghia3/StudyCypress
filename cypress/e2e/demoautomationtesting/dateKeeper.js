@@ -61,10 +61,6 @@ When('I wanna select {string} on DateKeeper', (date)=> {
     cy.log("Nghia00___"+ month + "__" + year)
 
 
-    // dateKeeper.getMonth().then(($Object) => {
-       // xxx = $Object.text().toString()
-    // });
-
     dateKeeper.getYear().then($elem => {
         yearDiff = parseInt($elem.text()) - parseInt(year)
     });
@@ -102,13 +98,12 @@ When('I wanna select {string} on DateKeeper', (date)=> {
 
 })
 
-When('I wanna test', ()=> {
-    cy.log("Nghiaday___" + day)
-    cy.log("Nghiamonth___" + month)
-    cy.log("Nghiayear___" + year)
-    cy.log("NghiamonthNoActual___" + monthNoActual)
-    cy.log("NghiamonthNoExpect___" + monthNoExpect)
-    cy.log("NghiayearDiff___" + yearDiff)
+When('I wanna select the date chosen', ()=> {
+    let clickTime = yearDiff*12 + monthNoActual - monthNoExpect
+    for(let i = 0; i < clickTime; i++) {
+        dateKeeper.getPreviousButton().click()
+    }
+    dateKeeper.getDate(day).click()
 })
 
 When('I wanna get month different from {string} with current date', (date)=> {
